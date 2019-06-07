@@ -2,7 +2,7 @@ import gmpy2 as gm
 import functions as fn
 import random
 
-rs = gm.random_state()
+# rs = gm.random_state()
 
 # q = fn.generate_prime(511)
 # p = q*2 + 1
@@ -57,7 +57,7 @@ rhs = (v * temp) % p
 
 proxy_public = rhs
 
-# print(lhs == rhs)
+print(lhs == rhs)
 
 
 m = 12345678
@@ -69,6 +69,16 @@ print(ori_verify)
 
 (proxy_r, proxy_sig) = fn.sign(m, g, proxy_private, p)
 proxy_verify = fn.verify(p, g, proxy_public, proxy_r, proxy_sig, m)
+
+print(proxy_verify)
+
+(ori_r, ori_sig) = fn.sign(m, g, original_private, p)
+ori_verify = fn.verify(p, g, proxy_public, ori_r, ori_sig, m)
+
+print(ori_verify)
+
+(proxy_r, proxy_sig) = fn.sign(m, g, proxy_private, p)
+proxy_verify = fn.verify(p, g, original_public, proxy_r, proxy_sig, m)
 
 print(proxy_verify)
 
